@@ -34,6 +34,6 @@ public class ThreadPoolExamples {
 		executor.submit(new SimplePrintIdThread(2));
 		executor.submit(new SimplePrintIdThread(3));
 		
-		
+		executor.shutdown();
 	}
 }
