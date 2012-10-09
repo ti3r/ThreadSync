@@ -17,18 +17,29 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE. 
  */
-public class Main {
+package org.blanco.test.nio;
 
-	static int tId = 0;
-	
-	public static void main(String[] args) throws InterruptedException{
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+
+public class NIOExample {
+
+	/**
+	 * @param args
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		Path report = Paths.get("c:/report.usage");
+		Path out = Paths.get("c:/copy.txt");
+		Files.copy(report, out, StandardCopyOption.COPY_ATTRIBUTES);
 		
-		ServiceStub stub = new ServiceStub();
-		stub.process(1);
-		stub.process(2);
-		stub.process(3);
+		String content = new String(Files.readAllBytes(report));
+		System.out.println(content);
+		
 	}
-	
-	
-	
+
 }

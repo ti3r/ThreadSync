@@ -17,18 +17,23 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE. 
  */
-public class Main {
+package org.blanco.test.thread;
 
-	static int tId = 0;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class ThreadPoolExamples {
+
 	
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args){
+		BlockingQueue<Runnable> executorQueue = new LinkedBlockingDeque<Runnable>();
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 5, 20, TimeUnit.SECONDS, executorQueue);
+		executor.submit(new SimplePrintIdThread(1));
+		executor.submit(new SimplePrintIdThread(2));
+		executor.submit(new SimplePrintIdThread(3));
 		
-		ServiceStub stub = new ServiceStub();
-		stub.process(1);
-		stub.process(2);
-		stub.process(3);
+		
 	}
-	
-	
-	
 }

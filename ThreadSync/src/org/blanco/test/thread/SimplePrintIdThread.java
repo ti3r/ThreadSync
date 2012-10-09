@@ -17,18 +17,44 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE. 
  */
-public class Main {
-
-	static int tId = 0;
+package org.blanco.test.thread;
+/**
+ * This class just prints its id to the System.out 
+ * when it is run. It can be configured to wait for a period
+ * of time before the run method exits.
+ * 
+ * @author Alexandro Blanco <ti3r.bubblenet@gmail.com>
+ *
+ */
+public class SimplePrintIdThread extends Thread {
+	/** The id of the Thread */
+	private long id = -1;
+	/** The number of milliseconds to wait before end of run */
+	private long sleep = -1;
 	
-	public static void main(String[] args) throws InterruptedException{
-		
-		ServiceStub stub = new ServiceStub();
-		stub.process(1);
-		stub.process(2);
-		stub.process(3);
+	
+	
+	public SimplePrintIdThread(long id, long sleep) {
+		super();
+		this.id = id;
+		this.sleep = sleep;
 	}
-	
-	
+
+	public SimplePrintIdThread(long id) {
+		super();
+		this.id = id;
+	}
+
+	@Override
+	public void run() {
+		System.out.println("Running Thread #:"+id);
+		if (sleep > 0){
+			try {
+				sleep(sleep);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }
